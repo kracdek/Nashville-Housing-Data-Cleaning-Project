@@ -24,7 +24,12 @@ SET SaleDate = CONVERT(Date,SaleDate)
 
 -- Populate Property Address data
 
-SELECT a.ParcelID, a.PropertyAddress, b.ParcelID, b.PropertyAddress, ISNULL(a.PropertyAddress,b.PropertyAddress)
+SELECT 
+	a.ParcelID, 
+	a.PropertyAddress, 
+	b.ParcelID, 
+	b.PropertyAddress, 
+	ISNULL(a.PropertyAddress,b.PropertyAddress)
 FROM PortfolioProject..NashvilleHousing a
 JOIN PortfolioProject..NashvilleHousing b
 	ON a.ParcelID = b.ParcelID
@@ -48,9 +53,10 @@ FROM PortfolioProject..NashvilleHousing
 --WHERE PropertyAddress IS NULL
 --ORDER BY ParcelID
 
-SELECT PropertyAddress
-,SUBSTRING(PropertyAddress, 1, CHARINDEX(',', PropertyAddress) -1 ) as Address
-, SUBSTRING(PropertyAddress, CHARINDEX(',', PropertyAddress) + 1 , LEN(PropertyAddress)) as Address
+SELECT 
+	PropertyAddress,
+	SUBSTRING(PropertyAddress, 1, CHARINDEX(',', PropertyAddress) -1 ) as Address,
+	SUBSTRING(PropertyAddress, CHARINDEX(',', PropertyAddress) + 1 , LEN(PropertyAddress)) as Address
 FROM PortfolioProject..NashvilleHousing
 
 ALTER TABLE NashvilleHousing
